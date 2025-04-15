@@ -8,8 +8,9 @@ def test_get_element(builder):
     context = builder.GetContext()
     global_obj = context.GetGlobal()
     api = global_obj["Api"]
-    document = api.Call("GetDocument")
-    assert document.Call("GetElement", 0).Call("GetText").ToString() == "This is just a sample text. Nothing special."
+    text = api.Call("GetDocument").Call("GetElement", 0).Call("GetText").ToString()
+    print(f"Result: {text}")
+    assert text == "This is just a sample text. Nothing special."
     builder.CloseFile()
 
 
@@ -20,8 +21,9 @@ def test_get_element2(builder):
     context = builder.GetContext()
     global_obj = context.GetGlobal()
     api = global_obj["Api"]
-    document = api.Call("GetDocument")
-    assert document.Call("GetElement", 0).Call("GetText").ToString() == "This is just a sample text. Nothing special."
+    text = api.Call("GetDocument").Call("GetElement", 0).Call("GetText").ToString()
+    print(f"Result: {text}")
+    assert text == "This is just a sample text. Nothing special."
     builder.CloseFile()
 
 
@@ -32,8 +34,9 @@ def test_get_element3(builder):
     context = builder.GetContext()
     global_obj = context.GetGlobal()
     api = global_obj["Api"]
-    document = api.Call("GetDocument")
-    assert document.Call("GetElement", 0).Call("GetText").ToString() == "This is just a sample text. Nothing special."
+    text = api.Call("GetDocument").Call("GetElement", 0).Call("GetText").ToString()
+    print(f"Result: {text}")
+    assert text == "This is just a sample text. Nothing special."
     builder.CloseFile()
 
 
@@ -44,6 +47,7 @@ def test_get_element4(builder):
     context = builder.GetContext()
     global_obj = context.GetGlobal()
     api = global_obj["Api"]
-    document = api.Call("GetDocument")
-    assert document.Call("GetElement", 0).Call("GetText").ToString() == "This is just a sample text. Nothing special."
+    text = api.Call("GetDocument").Call("GetElement", 0).Call("GetText").ToString()
+    print(f"Result: {text}")
+    assert text == "This is just a sample text. Nothing special."
     builder.CloseFile()

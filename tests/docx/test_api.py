@@ -8,8 +8,9 @@ def test_create_paragraph(builder):
     context = builder.GetContext()
     global_obj = context.GetGlobal()
     api = global_obj["Api"]
-    document = api.Call("GetDocument")
-    assert document.Call("GetElement", 1).Call("GetText").ToString() == "This is a new paragraph"
+    text = api.Call("GetDocument").Call("GetElement", 1).Call("GetText").ToString()
+    print(f"Result: {text}")
+    assert text == "This is a new paragraph"
     builder.CloseFile()
 
 
@@ -20,6 +21,7 @@ def test_create_run(builder):
     context = builder.GetContext()
     global_obj = context.GetGlobal()
     api = global_obj["Api"]
-    document = api.Call("GetDocument")
-    assert document.Call("GetElement", 1).Call("GetText").ToString() == "This is a text run"
+    text = api.Call("GetDocument").Call("GetElement", 0).Call("GetText").ToString()
+    print(f"Result: {text}")
+    assert text == "This is a text run"
     builder.CloseFile()
