@@ -5,7 +5,7 @@ class ScriptJS:
     def __init__(self):
         self.temp_files = []
     
-    def prepare_script(self, script_path: str) -> str:
+    def prepare_script(self, script_path: str) -> (str, str):
         """
         Checks if the JS script contains 'docbuilder' in the first 10 rows and last 10 rows.
         If not found in first 10 rows, adds 'builder.CreateFile("docx");' to the beginning.
@@ -67,12 +67,12 @@ class ScriptJS:
             # Keep track of temp files for cleanup
             self.temp_files.append(temp_script_path)
             
-            return temp_script_path
+            return temp_script_path, output_filename
         
         # Return the original path if no modification was needed
-        return script_path
+        return script_path, output_filename
         
-    def cleanup(self):
+    def cleanup(self) -> None:
         """
         Clean up any temporary files created during script preparation.
         """
