@@ -27,7 +27,6 @@ class ScriptHelper:
 
         with open(script_path, 'r') as file:
             lines = file.readlines()
-            file.close()
         if lines and not lines[-1].endswith('\n'):
             lines[-1] += '\n'
 
@@ -35,13 +34,12 @@ class ScriptHelper:
             lines.insert(0, f'builder.OpenFile("{open_file}");\n')
         else:
             lines.insert(0, f'builder.CreateFile("{file_extension}");\n')
-            lines.append(f'builder.SaveFile("{file_extension}", "{output_file}");\n')
+            lines.append(f'builder.SaveFile("{file_extension}", "{output_file}.{file_extension}");\n')
         lines.append('builder.CloseFile();\n')
 
         # Create a temporary file with the modified content
         with open(script_file, 'w') as file:
             file.writelines(lines)
-            file.close()
 
         return script_file, output_file
 

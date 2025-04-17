@@ -4,7 +4,7 @@ from lib.config import DOCSERVER_URL
 class DocumentServer:
     def __init__(self, server_url: str = None) -> None:
         if server_url:
-            # some check that server is available
+            # some checkers that server is available
             pass
         self.docserver_url = server_url or self.default_url
 

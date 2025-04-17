@@ -9,7 +9,10 @@ class DocBuilderWrapper:
 
     def __init__(self):
         if BUILDER_PLATFORM == 'WEB':
-            self.docbuilder = DocumentServer()
+            self.__docbuilder = DocumentServer()
         else:
-            self.docbuilder = DocumentBuilder()
+            self.__docbuilder = DocumentBuilder()
         self.script_helper = ScriptHelper()
+
+    def build(self, script_path):
+        return self.__docbuilder.run_script(script_path)
