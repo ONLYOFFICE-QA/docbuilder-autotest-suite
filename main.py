@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from lib.document_builder import DocumentBuilder
-from lib.script_js import ScriptJS
+from lib.docbuilder.documentbuilder import DocumentBuilder
+from lib.script_helper import ScriptJS
 import os
 
 # Initialize the script wrapper and document builder
