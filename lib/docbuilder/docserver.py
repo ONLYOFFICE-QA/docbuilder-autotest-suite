@@ -18,4 +18,4 @@ class DocumentServer:
         """
         # send request to docserver
         print(f'{self.docserver_url} {file_path}')
-        return {'code': 0, 'stdout': '', 'stderr': ''}
+        return {'returncode': 0, 'stdout': '', 'stderr': ''}

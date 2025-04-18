@@ -17,9 +17,20 @@ class DocumentBuilder:
         """Run DocumentBuilder with a script file.
         file_path: Path to script file.
         """
-        cmd = [
-            self.docbuilder_path,
-            file_path,
-        ]
-        result = subprocess.run(cmd, capture_output=True, text=True)
-        return {'code': result.returncode, 'stdout': result.stdout, 'stderr': result.stderr}
+        popen = subprocess.Popen(
+            self.docbuilder_path + " \"" + file_path + "\"",
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True,
+        )
+        result = {'returncode': 0, 'stdout': '', 'stderr': ''}
+        try:
+            stdout, stderr = popen.communicate()
+            popen.wait()
+            result['stdout'] = stdout.strip().decode('utf-8', errors='ignore')
+            result['stderr'] = stderr.strip().decode('utf-8', errors='ignore')
+            result['returncode'] = popen.returncode
+        finally:
+            popen.stdout.close()
+            popen.stderr.close()
+        return result
