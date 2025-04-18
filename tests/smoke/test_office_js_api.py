@@ -2,14 +2,11 @@ import os
 import pytest
 from lib.data_files_helper import DataFilesHelper
 
-DOCUMENTATION_EXAMPLES = os.path.abspath('..\\developer_tools\\office-js-api\\Examples')
-
-
 @pytest.mark.parametrize(
     'file_path',
     [
         path for folder in ['Word', 'Cell', 'Slide', 'Forms']
-        for path in DataFilesHelper.get_test_files(os.path.join(DOCUMENTATION_EXAMPLES, folder))
+        for path in DataFilesHelper.get_test_files(os.path.join('office-js-api/Examples', folder))
     ],
 )
 def test_office_js_api_scripts(builder, file_path: str):

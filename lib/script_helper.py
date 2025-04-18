@@ -1,8 +1,6 @@
 import os
 import re
 import tempfile
-from argparse import ArgumentError
-
 from lib.config import TMP_FOLDER
 
 
@@ -66,7 +64,7 @@ class ScriptHelper:
             else:
                 return doc_type
         else:
-            raise ArgumentError(script_path, 'Cannot find doctype in script path')
+            raise ValueError('Cannot find doctype in script path')
 
     @staticmethod
     def __get_tempfile_name(prefix: str) -> str:

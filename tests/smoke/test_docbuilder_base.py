@@ -3,12 +3,10 @@ import pytest
 from lib.docbuilder import DocumentBuilder
 from lib.data_files_helper import DataFilesHelper
 
-SMOKES_PATH = os.path.abspath('scripts/smoke/templates')
-
 
 @pytest.mark.parametrize(
     'template_path',
-    DataFilesHelper.get_test_files(SMOKES_PATH),
+    DataFilesHelper.get_test_files('scripts/smoke/templates'),
 )
 def test_docbuilder_base(builder, template_path: str) -> None:
     prepared_script_path, output_path = builder.script_helper.prepare_script(template_path)
