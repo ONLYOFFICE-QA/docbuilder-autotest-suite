@@ -1,13 +1,17 @@
 from invoke import task
 
 @task
-def run(c):
-    c.run("pytest -n auto --log-cli-level=DEBUG > ./out.log 2>&1")
-
-@task
 def portable_docbuilder(c):
     c.run("python download.py")
 
 @task
-def csv(c):
-    c.run("py.test --csv tests.csv --csv-columns host,function,status,duration,parameters_as_columns")
+def run_tests(c):
+    c.run("pytest tests -n auto --tb=native")
+
+@task
+def run_tests_outlog(c):
+    c.run("pytest tests -n auto --tb=native --log-cli-level=DEBUG > ./out.log 2>&1")
+
+@task
+def run_tests_csv(c):
+    c.run("pytest tests --csv tests.csv --tb=native --csv-columns host,function,status,duration,parameters_as_columns")
