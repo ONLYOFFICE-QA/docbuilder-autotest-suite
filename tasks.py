@@ -7,3 +7,7 @@ def run(c):
 @task
 def portable_docbuilder(c):
     c.run("python download.py")
+
+@task
+def csv(c):
+    c.run("py.test --csv tests.csv --csv-columns host,function,status,duration,parameters_as_columns")
