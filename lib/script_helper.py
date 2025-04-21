@@ -76,7 +76,6 @@ class ScriptHelper:
             lines[0] = script_body
 
         if not self.__script_contains_close_commands(script_body):
-            # lines.append(f'builder.SaveFile("{file_extension}", "{output_file}");\n')
             lines.append('builder.CloseFile();\n')
 
         # Create a temporary file with the modified content

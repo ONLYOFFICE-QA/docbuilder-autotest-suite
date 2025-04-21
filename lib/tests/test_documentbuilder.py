@@ -11,7 +11,6 @@ builder = DocumentBuilder()
 
 def test_run_script():
     logging.info("Testing the run_script method")
-    # Assume 'script_path' is the path to a valid script for the test
     script_path, output_path = ScriptHelper().prepare_create_script(file_path)
     result = builder.run_script(script_path)
     assert result['returncode'] == 0, 'Script was not executed correctly'
