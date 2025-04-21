@@ -52,6 +52,7 @@ coverage.xml
 
 # Django stuff:
 *.log
+*.csv
 local_settings.py
 db.sqlite3
 
@@ -120,3 +121,4 @@ windsurf_deployment_id.txt
 app
 office-js-api
 tmp
+onlyoffice-documentbuilder*
