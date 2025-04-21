@@ -14,5 +14,4 @@ def pytest_sessionfinish():
     """Actions after finish tests session
     """
     if os.path.exists(TMP_FOLDER):
-        # shutil.rmtree(TMP_FOLDER)
-        pass
+        shutil.rmtree(TMP_FOLDER)

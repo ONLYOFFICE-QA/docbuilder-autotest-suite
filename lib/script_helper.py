@@ -20,15 +20,26 @@ class ScriptHelper:
         output_file += f'.{file_extension}'
 
         script_body = self.__read_script_body(script_path)
-        match = re.search(r'builder\.SaveFile\(["\'][^"]*["\'],\s["\']([^"]*)["\']', script_body)
-        if match:
-            script_body = script_body.replace(match.group(1), output_file)
         lines = [script_body]
-        if not self.__script_contains_create_commands(script_body):
-            lines.insert(0, f'builder.CreateFile("{file_extension}");\n')
+
         if not self.__script_contains_close_commands(script_body):
             lines.append(f'builder.SaveFile("{file_extension}", "{output_file}");\n')
             lines.append('builder.CloseFile();\n')
+        else:
+            match = re.search(
+                r'builder\.SaveFile\(["\'][^"]*["\'],\s*["\'][^"]*["\']\)\W*\n',
+                script_body,
+            )
+            if not match:
+                raise ValueError('Instruction SaveFile not found in script body')
+            script_body = script_body.replace(
+                match.group(),
+                f'builder.SaveFile("{file_extension}", "{output_file}");\n',
+            )
+            lines[0] = script_body
+
+        if not self.__script_contains_create_commands(script_body):
+            lines.insert(0, f'builder.CreateFile("{file_extension}");\n')
 
         # Create a temporary file with the modified content
         with open(script_file, 'w') as file:
@@ -54,9 +65,18 @@ class ScriptHelper:
 
         script_body = self.__read_script_body(script_path)
         lines = [script_body]
+
         if not self.__script_contains_create_commands(script_body):
             lines.insert(0, f'builder.OpenFile("{open_file}");\n')
+        else:
+            match = re.search(r'builder\.OpenFile\(["\'][^"]*["\']\)\W*\n', script_body)
+            if not match:
+                raise ValueError('Instruction OpenFile not found in script body')
+            script_body = script_body.replace(match.group(), f'builder.OpenFile("{open_file}");\n')
+            lines[0] = script_body
+
         if not self.__script_contains_close_commands(script_body):
+            # lines.append(f'builder.SaveFile("{file_extension}", "{output_file}");\n')
             lines.append('builder.CloseFile();\n')
 
         # Create a temporary file with the modified content
