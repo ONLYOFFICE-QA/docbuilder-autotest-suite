@@ -1,0 +1,27 @@
+name: Linting
+on:
+  - pull_request
+jobs:
+  yamllint:
+    name: Yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Yamllint
+        uses: karancode/yamllint-github-action@master
+        with:
+          yamllint_comment: true
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  markdownlint:
+    name: markdownlint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check markdown files using `markdownlint`
+        run: |
+          npm install -g markdownlint-cli
+          markdownlint *.md
